@@ -5,13 +5,14 @@
         <ros2_control name="RealRobot" type="system">
             <hardware>
                 <plugin>diffdrive_mini_ocebot/DiffBotSystemHardware</plugin>
-		<param name="left_wheel_name">left_front_wheel_joint</param>
-		<param name="right_wheel_name">right_rear_wheel_joint</param>
-		<param name="left_wheel_pin">18</param>
-		<param name="right_wheel_pin">22</param>
-		<param name="left_encoder_pin">3</param>
-		<param name="right_encoder_pin">4</param>
-		<param name="enc_counts_per_rev">3640</param>
+                <param name="left_wheel_name">left_front_wheel_joint</param>
+                <param name="right_wheel_name">right_rear_wheel_joint</param>
+                <param name="left_wheel_pin">18</param>
+                <param name="right_wheel_pin">22</param>
+                <param name="left_encoder_pin">3</param>
+                <param name="right_encoder_pin">4</param>
+                <param name="enc_counts_per_rev">3640</param>
+                <parameters>$(find mini_ocebot)/config/my_real_controllers.yaml</parameters>
             </hardware>
             <joint name="left_front_wheel_joint">
                 <command_interface name="velocity">
@@ -70,12 +71,14 @@
                 <state_interface name="position" />
             </joint>
         </ros2_control>
+
+        <gazebo>
+            <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+                <parameters>$(find mini_ocebot)/config/my_sim_controllers.yaml</parameters>
+                <parameters>$(find mini_ocebot)/config/gaz_ros2_ctl_use_sim_time.yaml</parameters>
+            </plugin>
+        </gazebo>
     </xacro:if>
 
-    <gazebo>
-        <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
-            <parameters>$(find mini_ocebot)/config/my_controllers.yaml</parameters>
-            <parameters>$(find mini_ocebot)/config/gaz_ros2_ctl_use_sim_time.yaml</parameters>
-        </plugin>
-    </gazebo>
+    
 </robot>
