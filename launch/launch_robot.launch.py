@@ -4,7 +4,7 @@ from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, TimerAction
-from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.launch_description_sources import PythonLaunchDescriptionSource, FrontendLaunchDescriptionSource
 from launch.substitutions import Command
 from launch.actions import RegisterEventHandler
 from launch.event_handlers import OnProcessStart
@@ -13,6 +13,12 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     package_name = 'mini_ocebot'
+
+    ws = IncludeLaunchDescription(
+                FrontendLaunchDescriptionSource([os.path.join(
+                    get_package_share_directory('rosbridge_server'),'launch','rosbridge_websocket_launch.xml'
+                )]),
+    )
 
     rsp = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
@@ -62,6 +68,7 @@ def generate_launch_description():
     # Launch them all!
     return LaunchDescription([
         rsp,
+	ws,
         delayed_controller_manager,
         delayed_diff_drive_spawner,
         delayed_joint_broad_spawner
