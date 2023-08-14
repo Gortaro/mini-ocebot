@@ -22,4 +22,7 @@ diff_cont:
 
     use_stamped_vel: false
 
-    
+#joint_broad:
+#  ros__parameters:
+#    joints: ['left_front_wheel_joint', 'right_rear_wheel_joint']
+#    interfaces: ['velocity']
