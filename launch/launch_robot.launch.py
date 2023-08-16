@@ -26,6 +26,12 @@ def generate_launch_description():
                 )]), launch_arguments={'use_sim_time': 'false'}.items()
     )
 
+    camera = IncludeLaunchDescription(
+                PythonLaunchDescriptionSource([os.path.join(
+                    get_package_share_directory(package_name),'launch','camera.launch.py'
+                )]),
+    )
+
     robot_description = Command(['ros2 param get --hide-type /robot_state_publisher robot_description'])
 
     controller_params_file = os.path.join(get_package_share_directory(package_name), 'config', 'my_real_controllers.yaml')
@@ -69,6 +75,7 @@ def generate_launch_description():
     return LaunchDescription([
         rsp,
 	ws,
+	camera,
         delayed_controller_manager,
         delayed_diff_drive_spawner,
         delayed_joint_broad_spawner
