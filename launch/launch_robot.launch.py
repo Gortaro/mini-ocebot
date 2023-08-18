@@ -17,7 +17,7 @@ def generate_launch_description():
     ws = IncludeLaunchDescription(
                 FrontendLaunchDescriptionSource([os.path.join(
                     get_package_share_directory('foxglove_bridge'),'launch','foxglove_bridge_launch.xml'
-                )]),
+                )]), launch_arguments={'send_buffer_limit': '100000000'}.items()
     )
 
     rsp = IncludeLaunchDescription(
