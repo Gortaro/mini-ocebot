@@ -1,3 +1,5 @@
+# Launch file for the robot state publisher. Launches robot state publisher node which parses URDF files and turns them into the joints.
+
 import os
 
 from ament_index_python.packages import get_package_share_directory

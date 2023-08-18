@@ -1,3 +1,5 @@
+# Launch file for the physical robot. Launches websocket, robot state publisher, camera, and ros2_control nodes.
+
 import os
 
 from ament_index_python.packages import get_package_share_directory

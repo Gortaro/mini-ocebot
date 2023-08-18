@@ -1,3 +1,5 @@
+# Extended sim control launch file. Launches RViz along with the rest of the simulation.
+
 import os
 
 from ament_index_python.packages import get_package_share_directory
